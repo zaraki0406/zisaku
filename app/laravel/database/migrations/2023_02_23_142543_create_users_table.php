@@ -22,11 +22,11 @@ class CreateUsersTable extends Migration
             $table->string('profile','300')->nullable();
             $table->string('height','10')->nullable();
             $table->string('target‗weight','10')->nullable();
-            $table->tinyInteger('role');
+            $table->tinyInteger('role')->default('1');
             $table->boolean('del_flg')->default(false);
             $table->timestamps();
             $table->string('user_tokens','30')->nullable();
-            $table->tinyInteger('gender');
+            $table->tinyInteger('gender')->nullable();
         });
     }
 

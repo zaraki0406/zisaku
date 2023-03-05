@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Usercontroller;
+
 
 
 /*
@@ -17,4 +17,8 @@ Auth::routes();
 Route::get('/', function () {
     return view('home');
 });
-Route::POST('/completion', [Usercontroller::class, 'completion'])->name('Register.completion');
+Route::get('/mypage', function () {
+    $id = Auth::id();
+    $user = DB::table('users')->find($id);
+    return view('mypage', ['my_user' => $user]);
+});
