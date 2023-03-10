@@ -17,7 +17,7 @@ class CreateWeightsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->string('weight','10');
-            $table->tinyInteger('role');
+            $table->date('date');
             $table->boolean('hidden_flg')->default(false);
             $table->timestamps();
         });
