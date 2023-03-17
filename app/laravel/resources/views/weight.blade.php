@@ -5,25 +5,52 @@
 <p>名前:{{ $my_user->name }}</p>
 
 <div class>
-    <button type='button' class='btn btn-secondary' data-toggle="modal" data-target="Weight_edit">体重を記録</button>
+    <button type="button" class="btn btn-primary form-btn" data-toggle="modal" data-target="#exampleModalCenter">
+        体重を記録
+    </button>
 </div>
 
-<div class="modal fade" id="Weight_edit" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel"></h4></h4>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">確認画面</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{route('weight.register')}}">
+                    {{ csrf_field() }}
+                    <div class="form-group row">
+                    <label for="date" class="col-md-4 col-form-label text-md-right date">{{ __('日付') }}</label>
+                        <div class="col-md-6">
+                            <input id="date" type="date" name="date" class="form-control" value="">
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group row">
+                    <label for="weight" class="col-md-4 col-form-label text-md-right">{{ __('体重（kg）') }}</label>
+                        <div class="col-md-6">
+                            <input id="weight" type="weight" name="weight" class="form-control" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('登録') }}
+                        </button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <label></label>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-                    <button type="button" class="btn btn-danger"></button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
 
 <div class>
         <a href="">

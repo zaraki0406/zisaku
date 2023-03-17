@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Weight;
+use App\post;
+use App\user;
+use App\like;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,10 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class UsersController extends Controller
 {
     public function mypage() {
-
         $id = Auth::id();
         $user = DB::table('users')->find($id);
-        return view('mypage', ['my_user' => $user]);
+        $posts = Post::query()->where('user_id',$id)->get();
+        $Oposts = Post::query()->where('user_id', '!=',$id)->get();
+        return view('mypage', ['my_user' => $user,'my_post'=> $posts, 'user_post'=>$Oposts]);
     }
 
     public function profile_edit() {
@@ -48,16 +52,29 @@ class UsersController extends Controller
 
     public function account_logical_delete(Request $request) {
         $id = Auth::id();
-        $user = DB::table('users')->find($id);
-        $user->del_flg = 1;
-        $user->save();
-        return view('home');
+        $user = new user;
+        $delete = $user->find($id);
+        $delete->del_flg = 1;
+        $delete->save();
+        return view('/mypage');
     }
 
     public function weight(Request $request) {
         $id = Auth::id();
         $user = DB::table('users')->find($id);
+        //$weight = weight::where("")
         return view('weight', [
         'my_user' => $user,]);
     }
+
+    public function new_post() {
+        return view('post');
+    }
+
+    public function post_edit(int $id) {
+        $posts = Post::query()->where('id','=',$id)->first();
+        return view('post_edit', ['my_post' => $posts]);
+    }
+
+    
 }

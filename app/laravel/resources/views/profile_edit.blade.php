@@ -53,7 +53,7 @@
                             <label for="profile" class="col-md-4 col-form-label text-md-right">{{ __('プロフィール') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="profile" class="form-control" name="profile" value="{{ $my_user->profile }}"></textarea>
+                                <textarea id="profile" class="form-control" name="profile">{{ $my_user->profile }}</textarea>
                             </div>
                         </div>
 
@@ -67,14 +67,20 @@
                     </form>
                 </div>
                 <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <a href="account_delete">
-                                    <button type="submit" class="btn btn-primary" style='background-color:red'>
-                                        {{ __('アカウントを削除') }}
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="col-md-6 offset-md-4">
+                        <a href="account_delete">
+                            <button type="submit" class="btn btn-primary" style='background-color:red'>
+                                {{ __('アカウントを削除') }}
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <div class>
+                            <a href="mypage">
+                                <button type='button' class='btn btn-secondary'>マイページに戻る</button>
+                            </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
