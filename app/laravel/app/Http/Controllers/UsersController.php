@@ -16,10 +16,10 @@ class UsersController extends Controller
     public function mypage() {
         $id = Auth::id();
         $user = DB::table('users')->find($id);
-        $posts = Post::query()->where('user_id',$id)->get();
-        $Oposts = Post::query()->where('user_id', '!=',$id)->get();
-        return view('mypage', ['my_user' => $user,'my_post'=> $posts, 'user_post'=>$Oposts]);
+        $posts = Post::query()->where('user_id',$id)->paginate(5);
+        return view('mypage', ['my_user' => $user,'my_post'=> $posts]);
     }
+
 
     public function profile_edit() {
         $id = Auth::id();
@@ -62,9 +62,17 @@ class UsersController extends Controller
     public function weight(Request $request) {
         $id = Auth::id();
         $user = DB::table('users')->find($id);
-        //$weight = weight::where("")
+        $weight = weight::where("user_id",$id)->get();
+        $weight_data ='';
+        $weight_date ='';
+        foreach($weight as $weights){
+            $weight_data = $weight_data.$weights->weight.',';
+        };
+        foreach($weight as $weights){
+            $weight_date = $weight_date.$weights->date.',';
+        };
         return view('weight', [
-        'my_user' => $user,]);
+        'my_user' => $user,'weight_data'=>$weight_data,'weight_date'=>$weight_date]);
     }
 
     public function new_post() {

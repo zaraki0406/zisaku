@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\post;
 use App\user;
 use App\like;
+use App\comment;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class PostsController extends Controller
 {
   
+    
     public function post_register(request $request){
         $request->validate([
             'image' => 'file|image|mimes:jpeg,png,jpg|max:2048',
@@ -36,9 +38,26 @@ class PostsController extends Controller
         $like_model = new Like;
         $like = $like_model->where('post_id',$id)->get()->count();
         $posts ->likes_count = $like;
-        return view('post_detail', ['my_user' => $user,'my_post' => $posts]);
+        $user_comment = DB::table('comments')->select('users.id as id','users.name as name','users.image as image','comments.id as comments_id','comments.user_id as user_id','comments.post_id as post_id','comments.text as text')->join('users','comments.user_id','=','users.id')->where('post_id','=',$id)->get();
+        return view('post_detail', ['my_user' => $user,'my_post' => $posts,'user_comment'=> $user_comment]);
     }
    
+    public function PostEdit(Request $request) {
+        $post = Post::query()->where('id','=',$request->id)->first();
+        $request->validate([
+            'image' => 'file|image|mimes:jpeg,png,jpg|max:2048',
+         ]);
+        $image = request()->file('image');
+        $img_url = $image->storeAs('' ,$image ,'public');
+
+        $post->title = $request->title;
+        $post->date = $request->date;
+        $post->image = $image;
+        $post->comment = $request->comment;
+        $post->save();
+    
+        return redirect('/mypage');
+    }
 
     public function others_detail(int $id) {
         $posts = Post::query()->where('id','=',$id)->first();
@@ -47,7 +66,20 @@ class PostsController extends Controller
         $like_model = new Like;
         $like = $like_model->where('post_id',$id)->get()->count();
         $posts ->likes_count = $like;
-        return view('others_detail', ['my_user' => $user,'post' => $posts,'like_model'=>$like_model]);
+        $user_comment = DB::table('comments')->select('users.id as id','users.name as name','users.image as image','comments.id as comments_id','comments.user_id as user_id','comments.post_id as post_id','comments.text as text')->join('users','comments.user_id','=','users.id')->where('post_id','=',$id)->get();
+        return view('others_detail', ['my_user' => $user,'post' => $posts,'like_model'=>$like_model,'user_comment'=> $user_comment]);
+    }
+    public function others_comment(int $id,Request $request) {
+        $my_id=Auth::id();
+       
+
+        $comment =new comment;
+        $comment->user_id = $my_id;
+        $comment->post_id = $id;
+        $comment->text = $request->text;
+        $comment->save();
+
+        return back();
     }
 
     public function post_delete(int $id,Request $request) {
@@ -56,6 +88,31 @@ class PostsController extends Controller
         return redirect('/mypage');
     }
 
+    public function post_search(Request $request)
+    {
+        $id = Auth::id();
+        $keyword = $request->input('keyword');
+        $gender = $request->input('gender');
+        $query = Post::query()->select('posts.id as posts_id','posts.user_id as user_id','posts.title as title','posts.date as date','posts.image as image','posts.comment as comment','posts.hidden_flg as hidden_flg','users.name as name','users.gender as gender')->join('users','posts.user_id','=','users.id')->where('user_id', '!=',$id);
+        if(!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('comment', 'LIKE', "%{$keyword}%");
+        }
+        if(!empty($gender)) {
+            $query->where('gender', 'LIKE', "$gender");
+        }
+        
+        $user_post = $query->paginate(5);
+        return view('/post_search', compact('user_post', 'keyword'));
+    }
+
+    public function good_post()
+    {
+        $id = Auth::id();
+        
+        $user_post = Post::query()->select('likes.id as likes_id','likes.user_id as likes_user_id','likes.post_id as post_id','posts.id as id','posts.user_id as user_id','posts.title as title','posts.date as date','posts.image as image','posts.comment as comment','posts.hidden_flg as hidden_flg')->join('likes','posts.id','=','likes.post_id')->where('likes.user_id',$id)->get();
+        return view('/good_post', compact('user_post'));
+    }
     // いいね
     public function ajaxlike(Request $request)
     {

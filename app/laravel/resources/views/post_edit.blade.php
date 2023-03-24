@@ -1,14 +1,17 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('新規投稿') }}</div>
+                <div class="card-header">{{ __('投稿編集') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="" enctype="multipart/form-data">
+                    <form method="POST" action="PostEdit" enctype="multipart/form-data">
                         @csrf
+                        
+                         <input id="title" type="hidden" class="form-control" name="id" value="{{$my_post->id}}">
 
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('タイトル名') }}</label>

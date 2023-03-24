@@ -40,7 +40,7 @@
                         </div>
 
                         <div class>
-                            <a href="">パスワードをお忘れの方</a>
+                            <a href="{{ route('password.request') }}">パスワードをお忘れの方</a>
                         </div>
 
                         <div class="form-group row mb-0">

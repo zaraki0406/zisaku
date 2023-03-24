@@ -21,4 +21,15 @@ class WeightsController extends Controller
         $weight->save();
         return redirect('/weight');
    }
+   public function weight_edit(){
+    $id = Auth::id();
+    $user = DB::table('users')->find($id);
+    $weight = weight::where("user_id",$id)->get();
+    return view('/weight_edit', ['my_weight' => $weight]);
+    }
+    public function weight_delete(int $id,request $request){
+        $weight = weight::query()->where('id','=',$id)->first();
+        $weight ->delete();
+        return redirect('/weight');
+   }
 }

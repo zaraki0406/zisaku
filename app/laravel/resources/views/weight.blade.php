@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+<div id="element" data-name="{{$weight_data}}"></div>
+<div id="Delement" data-name="{{$weight_date}}"></div>
 <p><img src="{{ asset('storage'.$my_user->image)}}" ></p>
 
 <p>名前:{{ $my_user->name }}</p>
@@ -53,16 +55,11 @@
 
 
 <div class>
-        <a href="">
+        <a href="weight_edit">
             <button type='button' class='btn btn-secondary'>体重を編集</button>
         </a>
 </div>
 
-<div class>
-        <a href="">
-            <button type='button' class='btn btn-secondary'>体重を非表示/表示にする</button>
-        </a>
-</div>
 
 <div class>
         <a href="mypage">
@@ -70,34 +67,40 @@
         </a>
 </div>
 
-<h1>グラフ</h1>
    	<canvas id="myChart"></canvas>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 	<!-- グラフを描画 -->
    <script>
-	//ラベル
-
-	//グラフを描画
-   var ctx = document.getElementById("myChart");
-   var myChart = new Chart(ctx, {
-		type: 'line',
-		data : {
-			labels: labels,
-			datasets: [
-				{
-					label: '',
-					data: average_weight_log,
-					borderColor: "rgba(0,0,255,1)",
-         			backgroundColor: "rgba(0,0,0,0)"
-				}
-			]
-		},
-		options: {
-			title: {
-				display: true,
-				text: '体重ログ'
-			}
-		}
-   });
+        //ラベル
+        let element = document.getElementById('element');
+        let target = element.dataset.name;
+        let split_target = target.split(',');
+        let weight_target = split_target.slice(0,split_target.length-1);
+        let Delement = document.getElementById('Delement');
+        let Dtarget = Delement.dataset.name;
+        let split_Dtarget = Dtarget.split(',');
+        let date_target = split_Dtarget.slice(0,split_Dtarget.length-1);
+        //グラフを描画
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+            type: 'line',
+            data : {
+                labels:date_target,
+                datasets: [{
+                        label: '体重',
+                        data: weight_target,
+                        borderColor: "rgba(0,0,255,1)",
+                        backgroundColor: "rgba(0,0,0,0)",
+                        tension: 0,
+                    }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: '体重ログ'
+                }
+            }
+    });
    </script>
 @endsection

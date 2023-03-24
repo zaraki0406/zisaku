@@ -20,13 +20,16 @@
                     <span class="likesCount">いいね数{{$my_post->likes_count}}</span>
                     <p class="card-text">{{ $my_post ->date}}</p>
                     <p class="card-text">{{ $my_post ->comment}}</p>
-                </div>
             </div>
+                @foreach($user_comment as $comment)
+                <p><img src="{{asset('storage'.$comment->image)}}">{{$comment->name}} {{$comment->text}}</p>
+                @endforeach
         </div>
     </div>
 </div>
-<div class>
-    <button type='button' class='btn btn-secondary' onClick="history.back();">マイページに戻る</button>
+
+<div>
+    <button type='button' class='btn btn-secondary' onClick="history.back();">戻る</button>
 </div>
 
 <button type="button" class="btn btn-primary form-btn" data-toggle="modal" data-target="#exampleModalCenter">
