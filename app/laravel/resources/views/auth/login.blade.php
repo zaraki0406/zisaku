@@ -39,22 +39,20 @@
                             </div>
                         </div>
 
-                        <div class>
+                        <div class ="col-md-4  text-md-right">
                             <a href="{{ route('password.request') }}">パスワードをお忘れの方</a>
                         </div>
-
+                        <br>
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
+                            <div class="col-md-8 offset-md-2 d-flex justify-content-around">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('ログイン') }}
                                 </button>
-                            </div>
-                        </div>
 
-                        <div class>
-                            <a href="{{ route('register') }}">
-                                <button type='button' class='btn btn-secondary'>新規登録</button>
-                            </a>
+                                <a href="{{ route('register') }}">
+                                    <button type='button' class='btn btn-secondary'>新規登録</button>
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>

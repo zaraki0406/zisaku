@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <h1 class="header">いいねした投稿</h1>
+<div class="container-fluid d-flex justify-content-center mx-5"><h1 class="header">いいねした投稿</h1></div>
     <div class="container-fluid d-flex justify-content-center">
         <div class="row">
             <div class="card-deck">
@@ -18,8 +18,14 @@
                     <td>投稿がありません</td>
                 @endforelse
             </div>
+            <div class=" d-flex justify-content-center">{{ $user_post->links() }}</div>
         </div>
     </div>
+</div>
+<div class="d-flex justify-content-center">
+        <a href="mypage">
+            <button type='button' class='btn btn-secondary'>マイページに戻る</button>
+        </a>
 </div>
 
 @endsection

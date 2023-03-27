@@ -4,9 +4,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('アカウント情報編集') }}</div>
+                <div class="card-header bg-primary">{{ __('アカウント情報編集') }}</div>
 
                 <div class="card-body">
+                <div class="panel-body">
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
                     <form method="POST" action="{{route('profile.edit')}}" enctype="multipart/form-data">
                         @csrf
 
@@ -43,16 +54,14 @@
                         
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('ユーザーアイコン') }}</label>
-                            <img src="{{ asset('storage'.$my_user->image)}}" >
-                            <div class="col-md-6">
-                                <input id="image" type="file" name="image" class="form-control">
-                            </div>
+                            <img src="{{ asset('storage'.$my_user->image)}}" style="background: white;">
+                            <input id="image" type="file" name="image" >
                         </div>
 
                         <div class="form-group row">
                             <label for="profile" class="col-md-4 col-form-label text-md-right">{{ __('プロフィール') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="form-group row col-md-6">
                                 <textarea id="profile" class="form-control" name="profile">{{ $my_user->profile }}</textarea>
                             </div>
                         </div>
@@ -65,21 +74,24 @@
                             </div>
                         </div>
                     </form>
-                </div>
-                <div class="form-group row mb-0">
+                    <br>
+                    <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
                         <a href="account_delete">
                             <button type="submit" class="btn btn-primary" style='background-color:red'>
                                 {{ __('アカウントを削除') }}
-                            </button>
+                            </button>         
+                        </a>
+                        
+                        <a href="mypage">
+                            <button type='submit' class='btn btn-secondary col mt-2'>マイページに戻る</button>
                         </a>
                     </div>
                 </div>
-                <div class>
-                            <a href="mypage">
-                                <button type='button' class='btn btn-secondary'>マイページに戻る</button>
-                            </a>
-                    </div>
+                </div>
+                <br>
+                <div class="form-group row mb-0">
+                    
                 </div>
             </div>
         </div>

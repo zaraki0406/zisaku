@@ -1,10 +1,10 @@
 @extends('layouts.app')
 @section('content')
-<div class="search">
+<div class="search mx-5">
     <form action="{{ route('post.search') }}" method="GET">
         @csrf
 
-        <div class="form-group">
+        <div class="form-group d-flex flex-row justify-content-around">
             <div>
                 <label for="">キーワード
                 <div>
@@ -24,16 +24,16 @@
                     </select>
                 </div>
                 </label>
+                
             </div>
-
-            <div>
-                <input type="submit" class="btn btn-primary form-btn" value="検索">
-            </div>
+            <input type="submit" class="btn btn-primary form-btn" value="検索">
         </div>
     </form>
-    <h1 class="header">他者の投稿</h1>
-    <div class="container-fluid d-flex justify-content-center">
+    <div class="container-fluid d-flex justify-content-center mx-5"><h1>他者の投稿</h1></div>
+    <div class="container-fluid d-flex justify-content-center mx-5">
+    
         <div class="row">
+
             <div class="card-deck">
                 @forelse($user_post as $post)
                 <div class="col mb-5">
@@ -55,5 +55,9 @@
     </div>
 </div>
 <div class=" d-flex justify-content-center">{{ $user_post->links() }}</div>
-
+<div class="container-fluid d-flex justify-content-left mx-5 ">
+    <a href="mypage">
+        <button type='button' class='btn btn-secondary'>マイページに戻る</button>
+    </a>
+</div>
 @endsection

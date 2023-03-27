@@ -37,7 +37,10 @@ Route::get('/post_detail/{id}', [postsController::class, 'post_detail'])->name('
 Route::POST('/post_detail/{id}', [postsController::class, 'post_delete'])->name('post.delete');
 Route::get('/post_search', [postsController::class, 'post_search'])->name('post.search');
 Route::get('/good_post', [postsController::class, 'good_post']);
-
+Route::get('/administrator_usersearch', [UsersController::class, 'administrator_usersearch'])->name('administrator.usersearch');
+Route::get('/account_admin_delete/{id}', [UsersController::class, 'account_admin_delete'])->name('account.admin.delete');
+Route::get('/administrator_postsearch', [postsController::class, 'administrator_postsearch'])->name('administrator.postsearch');
+Route::get('/post_admin_delete/{id}', [postsController::class, 'post_admin_delete'])->name('post.admin.delete');
 Route::get('/others_detail/{id}', [postsController::class, 'others_detail'])->name('others.detail');
 Route::POST('/others_detail/{id}', [postsController::class, 'others_comment'])->name('others.comment');
 // いいね機能

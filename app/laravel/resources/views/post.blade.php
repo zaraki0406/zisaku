@@ -4,9 +4,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('新規投稿') }}</div>
+                <div class="card-header bg-primary">{{ __('新規投稿') }}</div>
 
                 <div class="card-body">
+                <div class="panel-body">
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
                     <form method="POST" action="{{route('post.register')}}" enctype="multipart/form-data">
                         @csrf
 
@@ -14,14 +25,14 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('タイトル名') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control" name="title" >
+                                <input id="title" type="text" class="form-control" name="title" value="{{old('title')}}">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="date" class="col-md-4 col-form-label text-md-right date">{{ __('日付') }}</label>
                                 <div class="col-md-6">
-                                    <input id="date" type="date" name="date" class="form-control" value="">
+                                    <input id="date" type="date" name="date" class="form-control" value="{{old('date')}}">
                                 </div>
                             </div>
                         
@@ -36,7 +47,7 @@
                             <label for="comment" class="col-md-4 col-form-label text-md-right">{{ __('コメント') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="comment" class="form-control" name="comment"></textarea>
+                                <textarea id="comment" class="form-control" name="comment">{{old('comment')}}</textarea>
                             </div>
                         </div>
 
@@ -45,14 +56,13 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('新規投稿') }}
                                 </button>
+                                <br><br>
+                                <a href="mypage">
+                                    <button type='button' class='btn btn-secondary'>マイページに戻る</button>
+                                </a>
                             </div>
                         </div>
                     </form>
-                    <div class>
-                            <a href="mypage">
-                                <button type='button' class='btn btn-secondary'>マイページに戻る</button>
-                            </a>
-                    </div>
                 </div>
             </div>
         </div>

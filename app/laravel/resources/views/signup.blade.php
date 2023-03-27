@@ -18,7 +18,7 @@
 
     <div class>
         <a href="{{ route('Register.confirmation') }}">
-            <button type='button' class='btn btn-secondary'>入力確認</button>
+            <button type='button' class='btn btn-secondary'>新規登録</button>
         </a>
     </div>
 </form>

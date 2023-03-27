@@ -5,6 +5,7 @@ use App\post;
 use App\user;
 use App\like;
 use App\comment;
+use App\Http\Requests\CreatePost;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,7 +15,7 @@ class PostsController extends Controller
 {
   
     
-    public function post_register(request $request){
+    public function post_register(CreatePost $request){
         $request->validate([
             'image' => 'file|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -33,6 +34,9 @@ class PostsController extends Controller
 
     public function post_detail(int $id) {
         $posts = Post::query()->where('id','=',$id)->first();
+        if(is_null($posts)){
+            abort(404);
+        }
         $myid = Auth::id();
         $user = DB::table('users')->find($myid);
         $like_model = new Like;
@@ -42,7 +46,7 @@ class PostsController extends Controller
         return view('post_detail', ['my_user' => $user,'my_post' => $posts,'user_comment'=> $user_comment]);
     }
    
-    public function PostEdit(Request $request) {
+    public function PostEdit(CreatePost $request) {
         $post = Post::query()->where('id','=',$request->id)->first();
         $request->validate([
             'image' => 'file|image|mimes:jpeg,png,jpg|max:2048',
@@ -61,6 +65,9 @@ class PostsController extends Controller
 
     public function others_detail(int $id) {
         $posts = Post::query()->where('id','=',$id)->first();
+        if(is_null($posts)){
+            abort(404);
+        }
         $oid = $posts->user_id;
         $user = DB::table('users')->find($oid);
         $like_model = new Like;
@@ -84,6 +91,9 @@ class PostsController extends Controller
 
     public function post_delete(int $id,Request $request) {
         $posts = Post::query()->where('id','=',$id)->first();
+        if(is_null($posts)){
+            abort(404);
+        }
         $posts ->delete();
         return redirect('/mypage');
     }
@@ -110,8 +120,34 @@ class PostsController extends Controller
     {
         $id = Auth::id();
         
-        $user_post = Post::query()->select('likes.id as likes_id','likes.user_id as likes_user_id','likes.post_id as post_id','posts.id as id','posts.user_id as user_id','posts.title as title','posts.date as date','posts.image as image','posts.comment as comment','posts.hidden_flg as hidden_flg')->join('likes','posts.id','=','likes.post_id')->where('likes.user_id',$id)->get();
+        $user_post = Post::query()->select('likes.id as likes_id','likes.user_id as likes_user_id','likes.post_id as post_id','posts.id as id','posts.user_id as user_id','posts.title as title','posts.date as date','posts.image as image','posts.comment as comment','posts.hidden_flg as hidden_flg')->join('likes','posts.id','=','likes.post_id')->where('likes.user_id',$id)->paginate(5);
         return view('/good_post', compact('user_post'));
+    }
+    public function administrator_postsearch(Request $request)
+    {
+        $id = Auth::id();
+        $keyword = $request->input('keyword');
+        $gender = $request->input('gender');
+        $query = Post::query()->select('posts.id as posts_id','posts.user_id as user_id','posts.title as title','posts.date as date','posts.image as image','posts.comment as comment','posts.hidden_flg as hidden_flg','users.name as name','users.gender as gender')->join('users','posts.user_id','=','users.id')->where('user_id', '!=',$id);
+        
+        if(!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('comment', 'LIKE', "%{$keyword}%");
+        }
+        if(!empty($gender)) {
+            $query->where('gender', 'LIKE', "$gender");
+        }
+        
+        $user_post = $query->paginate(5);
+        return view('/administrator_postsearch', compact('user_post', 'keyword'));
+    }
+    public function post_admin_delete(int $id,Request $request) {
+        $posts = Post::query()->where('id','=',$id)->first();
+        if(is_null($posts)){
+            abort(404);
+        }
+        $posts ->delete();
+        return redirect('/administrator_postsearch');
     }
     // いいね
     public function ajaxlike(Request $request)

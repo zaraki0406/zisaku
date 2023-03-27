@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Weight;
 use App\user;
+use App\Http\Requests\CreateWeight;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WeightsController extends Controller
 {
-    public function weight_register(request $request){
+    public function weight_register(CreateWeight $request){
         $id=Auth::id();
         $weight = new weight;
         $weight->user_id = $id;
@@ -27,6 +28,7 @@ class WeightsController extends Controller
     $weight = weight::where("user_id",$id)->get();
     return view('/weight_edit', ['my_weight' => $weight]);
     }
+
     public function weight_delete(int $id,request $request){
         $weight = weight::query()->where('id','=',$id)->first();
         $weight ->delete();

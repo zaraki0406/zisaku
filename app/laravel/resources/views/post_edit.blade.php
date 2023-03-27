@@ -5,9 +5,20 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('投稿編集') }}</div>
+                <div class="card-header bg-primary">{{ __('投稿編集') }}</div>
 
                 <div class="card-body">
+                <div class="panel-body">
+                            @if($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+                        </div>
                     <form method="POST" action="PostEdit" enctype="multipart/form-data">
                         @csrf
                         
@@ -30,10 +41,10 @@
                         
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('画像登録') }}</label>
-                            <img src="{{ asset('storage'.$my_post->image)}}">
-                            <div class="col-md-6">
-                                <input id="image" type="file" name="image" class="form-control">
-                            </div>
+                            <img src="{{ asset('storage'.$my_post->image)}}" class="rounded-circle float-left " width="200" height="200" style="background: white;">
+                           
+                                <input id="image" type="file" name="image" class="form-control w-50 m-auto" >
+                           
                         </div>
 
                         <div class="form-group row">
@@ -49,11 +60,15 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('投稿編集') }}
                                 </button>
+                                
                             </div>
                         </div>
                     </form>
-                    <div class>
-                        <button type='button' class='btn btn-secondary' onClick="history.back();">マイページに戻る</button>
+                    <br>
+                    <div class="row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type='button' class='btn btn-secondary'  onClick="history.back();">マイページに戻る</button>
+                        </div>
                     </div>
                 </div>
             </div>

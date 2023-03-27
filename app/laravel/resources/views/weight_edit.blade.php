@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h1 class="header">体重の記録</h1>
+<h1 class="header d-flex justify-content-center">体重の記録</h1>
     <div class="container-fluid d-flex justify-content-center">
         <div class="row">
             <div class="card-deck">
@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <p class="card-text">{{ $weight ->weight}}kg</p>
                             <p class="card-text">{{ $weight ->date}}</p>
-                            <a href="{{ route('weight.delete',['id' => $weight['id']]) }}" class="btn btn-primary">記録を削除</a>
+                            <a href="{{ route('weight.delete',['id' => $weight['id']]) }}" class="btn btn-primary" style='background-color:red'>記録を削除</a>
                         </div>
                     </div>
                 </div>
@@ -20,5 +20,7 @@
             </div>
         </div>
     </div>
-
+    <div class="d-flex justify-content-center">
+        <button type='button' class='btn btn-secondary' onClick="history.back();">戻る</button>
+    </div>
 @endsection

@@ -5,6 +5,7 @@ use App\Weight;
 use App\post;
 use App\user;
 use App\like;
+use App\Http\Requests\EditUser;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,10 +15,22 @@ use Illuminate\Support\Facades\Auth;
 class UsersController extends Controller
 {
     public function mypage() {
-        $id = Auth::id();
-        $user = DB::table('users')->find($id);
-        $posts = Post::query()->where('user_id',$id)->paginate(5);
-        return view('mypage', ['my_user' => $user,'my_post'=> $posts]);
+        $role = Auth::user()->role;
+
+        
+        if($role === 0){
+            return view('administrator_page');
+        }elseif($role ===1){
+            $id = Auth::id();
+            $user = DB::table('users')->find($id);
+            if(is_null($user->height)){
+                $user->height ='?';
+            };
+            $posts = Post::query()->where('user_id',$id)->paginate(5);
+            return view('mypage', ['my_user' => $user,'my_post'=> $posts]);
+        };
+        
+        
     }
 
 
@@ -27,7 +40,7 @@ class UsersController extends Controller
         return view('profile_edit', ['my_user' => $user]);
     }
 
-    public function ProfileEdit(Request $request){
+    public function ProfileEdit(EditUser $request){
          $request->validate([
             'image' => 'file|image|mimes:jpeg,png,jpg|max:2048',
          ]);
@@ -81,8 +94,34 @@ class UsersController extends Controller
 
     public function post_edit(int $id) {
         $posts = Post::query()->where('id','=',$id)->first();
+        if(is_null($posts)){
+            abort(404);
+        }
         return view('post_edit', ['my_post' => $posts]);
     }
 
-    
+    public function administrator_usersearch(Request $request) {
+        $id = Auth::id();
+        $keyword = $request->input('keyword');
+        $gender = $request->input('gender');
+        $query = user::query()->where('id', '!=',$id);
+        if(!empty($keyword)) {
+            $query->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('profile', 'LIKE', "%{$keyword}%");
+        }
+        if(!empty($gender)) {
+            $query->where('gender', 'LIKE', "$gender");
+        }
+        
+        $users = $query->paginate(5);
+        return view('/administrator_usersearch', compact('users', 'keyword'));
+    }
+    public function account_admin_delete(int $id,request $request) {
+        $user = user::query()->where('id','=',$id);
+        if(is_null($user)){
+            abort(404);
+        }
+        $user->delete();
+        return redirect('/administrator_usersearch');
+    }
 }
