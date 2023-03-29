@@ -26,7 +26,7 @@ class EditUser extends FormRequest
         return [
         'name' => 'required|max:10',
         'image' => 'required',
-        'height' => 'integer|max:10|nullable' ,
+        'height' => 'integer|max:250|nullable' ,
         'profile' => 'max:500|nullable'
         ];
     }

@@ -4,7 +4,7 @@
     <div id="Delement" data-name="{{$weight_date}}"></div>
     <div class="d-flex flex-column align-items-center mx-5 ">
         <div class="d-flex mb-4 col-md-6 col-md-offset-3">
-            <p><img src="{{ asset('storage'.$my_user->image)}}" style="background: white;" class="rounded-circle float-left" width="200" height="200"></p>
+            <p><img src="{{ asset('storage'.$my_user->image)}}" style="background: #cce5ff;" class="rounded-circle float-left" width="200" height="200"></p>
 
             <h3>名前:{{ $my_user->name }}</h3>
         </div>
@@ -29,11 +29,11 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">確認画面</h5>
+            <div class="modal-content" >
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" >確認画面</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -79,7 +79,8 @@
             </div>
         </div>
     </div>
-    <div class="mx-auto w-50 ">
+    <br>
+    <div class="mx-auto w-50 " style="background: #cce5ff; border-radius: 10px;">
         <canvas id="myChart"></canvas>
             <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
         <!-- グラフを描画 -->

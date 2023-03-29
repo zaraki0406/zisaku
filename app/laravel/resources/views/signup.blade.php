@@ -1,5 +1,5 @@
 <form action="">
-    新規登録
+    <div class = "bg-primary">新規登録</div>
     <div class = "">
         <input type='text' class='form-control' placeholder = 'ユーザー名入力' name='name'/>
     </div>

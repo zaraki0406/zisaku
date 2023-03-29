@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="d-flex flex-column align-items-center mx-5">
-    <p><img src="{{ asset('storage'.$my_user->image)}}" style="background: white;"></p>
+    <p><img src="{{ asset('storage'.$my_user->image)}}" style="background: #cce5ff;"></p>
     <p>名前:{{ $my_user->name }}</p>
     <p>メールアドレス:{{ $my_user->email }}</p>
     <p>プロフィール：{{ $my_user->profile }}</p>

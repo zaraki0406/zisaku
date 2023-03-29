@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'zisaku') }}</title>
+    <title>{{ config('app.name', '運動日記') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -21,8 +21,8 @@
 
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
+<body style = "background:#39CEFF;">
+    <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light  shadow-sm bg-primary">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/mypage') }}">
@@ -78,5 +78,6 @@
             @yield('content')
         </main>
     </div>
+    
 </body>
 </html>

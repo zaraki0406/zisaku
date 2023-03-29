@@ -54,7 +54,7 @@
                         
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('ユーザーアイコン') }}</label>
-                            <img src="{{ asset('storage'.$my_user->image)}}" style="background: white;">
+                            <img src="{{ asset('storage'.$my_user->image)}}" style="background: white;" class="rounded-circle float-left">
                             <input id="image" type="file" name="image" >
                         </div>
 

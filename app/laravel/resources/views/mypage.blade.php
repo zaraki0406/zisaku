@@ -8,12 +8,12 @@
     margin: auto;
 }
 </style>
-<div class="d-flex flex-column align-items-center mx-5">
+<div class="d-flex flex-column align-items-center mx-5" >
     <div class="d-flex mb-4 col-md-6 col-md-offset-3">
         @if (Session::has('message'))
             <p>{{ session('message') }}</p>
         @endif
-        <p><img src="{{ asset('storage'.$my_user->image)}}" class="rounded-circle float-left" width="200" height="200" style="background: white;"></p>
+        <p><img src="{{ asset('storage'.$my_user->image)}}" class="rounded-circle float-left" width="200" height="200" style="background: #cce5ff;"></p>
         <h3 >名前:{{ $my_user->name }}<br><br><br>メールアドレス:{{ $my_user->email }}</h3>
         
     </div>
@@ -53,12 +53,12 @@
         </div>
     </div>
 </div>
-<div class = "d-flex flex-column align-items-center mx-5"><h1 class="header">自身の投稿</h1></div>
-        <div class="container-fluid d-flex justify-content-center">
-            <div class="row">
-                <div class="card-deck">
+<div class = "d-flex flex-column align-items-center mx-5" ><h1 class="header">自身の投稿</h1></div>
+        <div class="container-fluid d-flex justify-content-center" >
+            <div class="row" >
+                <div class="card-deck" >
                     @foreach($my_post as $post)
-                        <div class="card" style="width: 300px;">
+                        <div class="card" style="width: 300px; background: #cce5ff;">
                             <div class="card-img-top" ><img src="{{ asset('storage'.$post->image)}}" style="width: 100%; background: white;" ></div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post ->title}}</h5>

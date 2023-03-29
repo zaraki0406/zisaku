@@ -5,8 +5,8 @@
         <div class="row">
             <div class="card-deck">
                 @forelse($my_weight as $weight)
-                <div class="col mb-5">
-                    <div class="card" style="width: 300px;">
+                <div class="col mb-5" >
+                    <div class="card" style="width: 300px; background: #cce5ff;">
                         <div class="card-body">
                             <p class="card-text">{{ $weight ->weight}}kg</p>
                             <p class="card-text">{{ $weight ->date}}</p>

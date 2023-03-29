@@ -69,7 +69,8 @@ class UsersController extends Controller
         $delete = $user->find($id);
         $delete->del_flg = 1;
         $delete->save();
-        return view('/mypage');
+        Auth::logout();
+        return view('/home');
     }
 
     public function weight(Request $request) {

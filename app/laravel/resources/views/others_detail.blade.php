@@ -10,7 +10,7 @@
 }
 </style>
 <div class="d-flex flex-column align-items-center mx-5">
-    <p><img src="{{ asset('storage'.$my_user->image)}}" class="rounded-circle float-left" width="200" height="200" style="background: white;"></p>
+    <p><img src="{{ asset('storage'.$my_user->image)}}" class="rounded-circle float-left" width="200" height="200" style="background: #cce5ff;"></p>
     <h3>名前:{{ $my_user->name }}</h3>
 </div>
 <div class="d-flex flex-column align-items-center mx-5">
@@ -66,7 +66,7 @@
                     </div>
                 </form>
                 @foreach($user_comment as $comment)
-                <p><img src="{{asset('storage'.$comment->image)}}" class="rounded-circle float-left" width="50" height="50" style="background: white;">ユーザー:{{$comment->name}} <br> {{$comment->text}}</p>
+                <p><img src="{{asset('storage'.$comment->image)}}" class="rounded-circle float-left" width="50" height="50" style="background: #cce5ff;">ユーザー:{{$comment->name}} <br> {{$comment->text}}</p>
                 @endforeach
             </div>
         </div>

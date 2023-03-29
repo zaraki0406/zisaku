@@ -18,6 +18,7 @@
                 <label for="">性別
                 <div>
                     <select name="gender" data-toggle="select">
+                    <option value=""></option>
                     <option value="0">男性</option>
                     <option value="1">女性</option>
                     <option value="2">性別不詳</option>
@@ -37,7 +38,7 @@
             <div class="card-deck">
                 @forelse($user_post as $post)
                 <div class="col mb-5">
-                    <div class="card" style="width: 300px;">
+                    <div class="card" style="width: 300px; background: #cce5ff;">
                         <div class="card-img-top" ><img src="{{ asset('storage'.$post->image)}}" style="width: 100%; background: white;" ></div>
                         <div class="card-body">
                             <h5 class="card-title">{{ $post ->title}}</h5>
@@ -55,7 +56,7 @@
     </div>
 </div>
 <div class=" d-flex justify-content-center">{{ $user_post->links() }}</div>
-<div class="container-fluid d-flex justify-content-left mx-5 ">
+<div class="container-fluid d-flex justify-content-center mx-5">
     <a href="mypage">
         <button type='button' class='btn btn-secondary'>マイページに戻る</button>
     </a>

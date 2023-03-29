@@ -25,7 +25,7 @@ class CreateWeight extends FormRequest
     {
         return [
             'date' => 'required|date',
-            'weight' => 'required|integer|max:10'
+            'weight' => 'required|integer|max:200'
         ];
     }
 }

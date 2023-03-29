@@ -20,6 +20,7 @@
                     <label for="">性別
                     <div>
                         <select name="gender" data-toggle="select">
+                        <option value=""></option>
                         <option value="0">男性</option>
                         <option value="1">女性</option>
                         <option value="2">性別不詳</option>
@@ -33,7 +34,7 @@
                 </div>
             </div>
         </form>
-        <table> 
+        <table style= "background: #cce5ff;" class="rounded"> 
             <tr>
                 <th>ユーザーid</th>
                 <th>ユーザー名</th>
@@ -55,6 +56,7 @@
             @endforelse
         </table>
     </div>
+    <br>
     <div class=" d-flex justify-content-center">{{ $users->links() }}</div>
     <button type='button' class='btn btn-secondary' onClick="history.back();">戻る</button>
 </div>

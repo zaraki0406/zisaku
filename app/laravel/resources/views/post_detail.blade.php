@@ -10,10 +10,10 @@
     <h3>名前:{{ $my_user->name }}</h3>
 </div>
 
-<div class="d-flex flex-column align-items-center mx-5">
-    <div class="row " style="width: 1000px;">
+<div class="d-flex flex-column align-items-center mx-5" >
+    <div class="row " style="width: 1000px;" >
         <div class="card-deck" style="width: 1000px;">
-            <div class="card">
+            <div class="card" >
                 <div class="card-img-top d-flex flex-column align-items-center" ><img src="{{ asset('storage'.$my_post->image)}}" style="width: 200px; background: white;" ></div>
                 <div class="card-body">
                     <h3 class="card-title">タイトル：{{ $my_post ->title}}</h3>
