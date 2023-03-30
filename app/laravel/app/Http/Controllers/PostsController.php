@@ -112,7 +112,7 @@ class PostsController extends Controller
             $query->where('gender', 'LIKE', "$gender");
         }
         
-        $user_post = $query->paginate(5);
+        $user_post = $query->orderBy('date', 'desc')->paginate(10);
         return view('/post_search', compact('user_post', 'keyword'));
     }
 
@@ -138,7 +138,7 @@ class PostsController extends Controller
             $query->where('gender', 'LIKE', "$gender");
         }
         
-        $user_post = $query->paginate(5);
+        $user_post = $query->paginate(10);
         return view('/administrator_postsearch', compact('user_post', 'keyword'));
     }
     public function post_admin_delete(int $id,Request $request) {

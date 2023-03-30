@@ -1,36 +1,39 @@
 @extends('layouts.app')
 @section('content')
-<div class="search mx-5">
+<div class="search mx-5 ">
     <form action="{{ route('post.search') }}" method="GET">
         @csrf
+        <div class = "d-flex justify-content-end" >
+            <div class="card align-items-center pt-3" style="width:40%; background: #cce5ff;">
+                <div class="form-group d-flex flex-row ">
+                    <div class="mr-2">
+                        <label for="">キーワード
+                        <div>
+                            <input type="text" name="keyword" value="{{ $keyword }}">
+                        </div>
+                        </label>
+                    </div>
 
-        <div class="form-group d-flex flex-row justify-content-around">
-            <div>
-                <label for="">キーワード
-                <div>
-                    <input type="text" name="keyword" value="{{ $keyword }}">
+
+                    <div class="mr-2">
+                        <label for="">性別
+                        <div>
+                            <select name="gender" data-toggle="select">
+                            <option value=""></option>
+                            <option value="0">男性</option>
+                            <option value="1">女性</option>
+                            <option value="2">性別不詳</option>
+                            </select>
+                        </div>
+                        </label>
+                        
+                    </div>
+                    <input type="submit" class="btn btn-primary form-btn" value="検索">
                 </div>
-                </label>
             </div>
-
-
-            <div>
-                <label for="">性別
-                <div>
-                    <select name="gender" data-toggle="select">
-                    <option value=""></option>
-                    <option value="0">男性</option>
-                    <option value="1">女性</option>
-                    <option value="2">性別不詳</option>
-                    </select>
-                </div>
-                </label>
-                
-            </div>
-            <input type="submit" class="btn btn-primary form-btn" value="検索">
         </div>
     </form>
-    <div class="container-fluid d-flex justify-content-center mx-5"><h1>他者の投稿</h1></div>
+    <div class="container-fluid d-flex justify-content-center mx-5 mt-3"><h1>他者の投稿</h1></div>
     <div class="container-fluid d-flex justify-content-center mx-5">
     
         <div class="row">

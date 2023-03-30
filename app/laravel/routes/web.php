@@ -35,6 +35,7 @@ Route::get('/post_edit/{id}', [UsersController::class, 'post_edit'])->name('post
 Route::POST('/post_edit/{id}', [postsController::class, 'PostEdit']);
 Route::get('/post_detail/{id}', [postsController::class, 'post_detail'])->name('post.detail');
 Route::POST('/post_detail/{id}', [postsController::class, 'post_delete'])->name('post.delete');
+Route::POST('/post_detail/{id}/comment', [postsController::class, 'post_comment'])->name('post.comment');
 Route::get('/post_search', [postsController::class, 'post_search'])->name('post.search');
 Route::get('/good_post', [postsController::class, 'good_post']);
 Route::get('/administrator_usersearch', [UsersController::class, 'administrator_usersearch'])->name('administrator.usersearch');

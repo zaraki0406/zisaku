@@ -6,29 +6,38 @@
 }
 </style>
 <div class="d-flex flex-column align-items-center mx-5">
-    <p><img src="{{ asset('storage'.$my_user->image)}}" class="rounded-circle float-left" width="200" height="200" style="background: white;"></p>
-    <h3>名前:{{ $my_user->name }}</h3>
+    <p><img src="{{ asset('storage'.$my_user->image)}}" class="rounded-circle float-left" width="200" height="200" style="background: #cce5ff;"></p>
+    <h3>投稿者:{{ $my_user->name }}</h3>
 </div>
 
-<div class="d-flex flex-column align-items-center mx-5" >
-    <div class="row " style="width: 1000px;" >
+<div class="d-flex flex-column align-items-center" >
         <div class="card-deck" style="width: 1000px;">
-            <div class="card" >
-                <div class="card-img-top d-flex flex-column align-items-center" ><img src="{{ asset('storage'.$my_post->image)}}" style="width: 200px; background: white;" ></div>
-                <div class="card-body">
+            <div class="card align-items-center pt-3" >
+                <div class="d-flex flex justify-content-center" >
+                    <img src="{{ asset('storage'.$my_post->image)}}" style="width: 200px; background: white;" >
+                
+                <div class="card-body d-flex flex-column">
                     <h3 class="card-title">タイトル：{{ $my_post ->title}}</h3>
                     <span class="likesCount">いいね数{{$my_post->likes_count}}</span>
                     <p class="card-text">日付：{{ $my_post ->date}}</p>
                     <h4 class="card-text">{{ $my_post ->comment}}</h4>
-                    
+                 
+                </div>
             </div>
-                @foreach($user_comment as $comment)
+
+        </div> 
+</div>
+<div class="d-flex flex-column align-items-center mt-3">
+    <div class="card-deck " style="width: 1000px;">
+        <div class="card align-items-center pt-3" style="width: 1000px;" >
+        <h3>コメント欄</h3>
+        @foreach($user_comment as $comment)
                 <p><img src="{{asset('storage'.$comment->image)}}" class="rounded-circle float-left " width="50" height="50" style="background: white;">ユーザー:{{$comment->name}} <br> {{$comment->text}}</p>
+                
                 @endforeach
         </div>
     </div>
 </div>
-
 <button type="button" class="btn btn-primary form-btn" data-toggle="modal" data-target="#exampleModalCenter">
     投稿を削除
 </button>

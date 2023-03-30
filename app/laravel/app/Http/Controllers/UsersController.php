@@ -114,7 +114,7 @@ class UsersController extends Controller
             $query->where('gender', 'LIKE', "$gender");
         }
         
-        $users = $query->paginate(5);
+        $users = $query->paginate(10);
         return view('/administrator_usersearch', compact('users', 'keyword'));
     }
     public function account_admin_delete(int $id,request $request) {

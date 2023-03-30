@@ -59,7 +59,7 @@
                 <div class="card-deck" >
                     @foreach($my_post as $post)
                         <div class="card" style="width: 300px; background: #cce5ff;">
-                            <div class="card-img-top" ><img src="{{ asset('storage'.$post->image)}}" style="width: 100%; background: white;" ></div>
+                            <div class="card-img-top" ><img src="{{ asset('storage'.$post->image)}}" style=" width: 100%;  background: white;" ></div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post ->title}}</h5>
                                 <p class="card-text">{{ $post ->date}}</p>

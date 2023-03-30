@@ -25,7 +25,7 @@ class WeightsController extends Controller
    public function weight_edit(){
     $id = Auth::id();
     $user = DB::table('users')->find($id);
-    $weight = weight::where("user_id",$id)->get();
+    $weight = weight::where("user_id",$id)->paginate(10);
     return view('/weight_edit', ['my_weight' => $weight]);
     }
 

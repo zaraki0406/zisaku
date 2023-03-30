@@ -20,6 +20,9 @@
             </div>
         </div>
     </div>
+    <dr>
+    <div class=" d-flex justify-content-center">{{ $my_weight->links() }}</div>
+    <dr>
     <div class="d-flex justify-content-center">
         <button type='button' class='btn btn-secondary' onClick="history.back();">戻る</button>
     </div>
